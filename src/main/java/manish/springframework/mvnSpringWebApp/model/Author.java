@@ -1,15 +1,23 @@
 package manish.springframework.mvnSpringWebApp.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by Manish Tiwari on 2/12/2019.
  */
+
+@Entity
 public class Author {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String firstName;
     private String lastName;
 
+    @ManyToMany
     private Set<Book> books = new HashSet<>();
 
     public Author(String firstName, String lastName, Set<Book> books) {
@@ -47,6 +55,14 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
